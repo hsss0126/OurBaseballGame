@@ -1,7 +1,14 @@
 package net.skhu.dto;
 
-public class User {
+import java.io.Serializable;
 
+public class User implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	int id;
 	String nickName;
 	String password;
@@ -57,4 +64,54 @@ public class User {
 		this.lose = lose;
 	}
 
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", nickName=" + nickName + ", password=" + password + ", stateId=" + stateId
+				+ ", win=" + win + ", lose=" + lose + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		result = prime * result + lose;
+		result = prime * result + ((nickName == null) ? 0 : nickName.hashCode());
+		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		result = prime * result + stateId;
+		result = prime * result + win;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		if (id != other.id)
+			return false;
+		if (lose != other.lose)
+			return false;
+		if (nickName == null) {
+			if (other.nickName != null)
+				return false;
+		} else if (!nickName.equals(other.nickName))
+			return false;
+		if (password == null) {
+			if (other.password != null)
+				return false;
+		} else if (!password.equals(other.password))
+			return false;
+		if (stateId != other.stateId)
+			return false;
+		if (win != other.win)
+			return false;
+		return true;
+	}
+
+	
 }
