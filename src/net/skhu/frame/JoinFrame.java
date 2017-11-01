@@ -41,18 +41,18 @@ public class JoinFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					JoinFrame window = new JoinFrame();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					JoinFrame window = new JoinFrame();
+//					window.frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the application.
@@ -87,7 +87,7 @@ public class JoinFrame {
 		
 		repwdField = new JPasswordField();
 		panel.add(repwdField);
-		//°¡ÀÔ ¹öÆ°
+		//ê°€ì… ë²„íŠ¼
 		joinBtn = new JButton("\uAC00\uC785");
 		joinBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -96,38 +96,38 @@ public class JoinFrame {
 				repassword = new String(repwdField.getPassword());
 				String checkResult;
 				String joinResult;
-				//ºñ¹Ğ¹øÈ£ µ¿ÀÏÇÏ°Ô ÀÔ·ÂÇß´ÂÁö È®ÀÎ(´ë¼Ò¹®ÀÚ ±¸ºĞ¾øÀ½)
+				//íŒ¨ìŠ¤ì›Œë“œ ì…ë ¥ ì¬í™•ì¸(ëŒ€ì†Œë¬¸ì êµ¬ë¶„ x)
 				if(password.equalsIgnoreCase(repassword)) {
-					System.out.println("ÀÔ·Â ºñ¹Ğ¹øÈ£ µ¿ÀÏ");
-					//´Ğ³×ÀÓ Áßº¹È®ÀÎ
+					System.out.println("íŒ¨ìŠ¤ì›Œë“œ ë™ì¼");
+					//ë‹‰ë„¤ì„ ì¤‘ë³µí™•ì¸
 					checkResult = myConnection.loginConnection(nickName,password);
 					
 					switch(Integer.parseInt(checkResult)) {
 					case ResponseCode.connect_error:
-						System.out.println("¼­¹ö ¿¬°á ¿À·ù");
+						System.out.println("ì„œë²„ ì—°ê²° ì˜¤ë¥˜");
 						break;
 					case ResponseCode.id_error:
-						System.out.println("°¡ÀÔ °¡´É");
+						System.out.println("ê°€ì… ê°€ëŠ¥");
 						joinResult = myConnection.joinConnection(nickName,password);
 						switch(Integer.parseInt(joinResult)) {
 						case ResponseCode.connect_error:
-							System.out.println("¼­¹ö ¿¬°á ¿À·ù");
+							System.out.println("ì„œë²„ ì—°ê²° ì˜¤ë¥˜");
 							break;
 						case ResponseCode.join_success:
-							System.out.println("È¸¿ø°¡ÀÔ ¿Ï·á");
+							System.out.println("ê°€ì… ì„±ê³µ");
 							frame.dispose();
 							break;
 						}
 						break;
 					default :
-						System.out.println("´Ğ³×ÀÓ Áßº¹");
+						System.out.println("ë‹‰ë„¤ì„ ì¤‘ë³µ");
 						break;
 					}
 				}
 			}
 		});
 		panel.add(joinBtn);
-		//Ãë¼Ò ¹öÆ°
+		//ì·¨ì†Œ ë²„íŠ¼
 		cancelBtn = new JButton("\uCDE8\uC18C");
 		cancelBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

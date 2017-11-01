@@ -5,6 +5,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 
 import org.json.simple.JSONObject;
 
@@ -91,6 +92,41 @@ public class MyConnection {
 			out.flush();
 			out.close();
 			System.out.println("json전송");
+			System.out.println(conn.getResponseCode());
+			if(conn.getResponseCode() == 200) {
+				BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+				while((result = br.readLine())!=null) {
+					System.out.println(result);
+					return result;
+				}
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		result = Integer.toString(ResponseCode.connect_error);
+		return result; 	
+	}
+	
+	public String infoConnection(String ...arg) {
+		URL url;
+		HttpURLConnection conn = null;
+		String result;
+		try {
+			String nickName = URLEncoder.encode(arg[0], "UTF-8");
+			url = new URL(URLs.url+"user/infowithNickName?nickName="+nickName);
+			conn = (HttpURLConnection) url.openConnection();
+			
+			conn.setReadTimeout(10000);
+			conn.setConnectTimeout(10000);
+			conn.setRequestMethod("GET");
+			conn.setRequestProperty("Cache-Control", "no-cache");
+			conn.setRequestProperty("Accept", "application/json");
+			conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+			conn.setDoInput(true);
+			conn.setDoOutput(false);
+			System.out.println("연결 세팅");
+			
 			System.out.println(conn.getResponseCode());
 			if(conn.getResponseCode() == 200) {
 				BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));

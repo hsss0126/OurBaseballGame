@@ -45,6 +45,7 @@ public class LoginFrame {
 	private JButton joinBtn;
 	
 	private JoinFrame joinFrame;
+	private MainFrame mainFrame;
 	
 	private MyConnection myConnection;
 	
@@ -96,7 +97,7 @@ public class LoginFrame {
 		
 		passwordField = new JPasswordField();
 		panel.add(passwordField);
-		//·Î±×ÀÎ ¹öÆ°
+		//ë¡œê·¸ì¸ ë²„íŠ¼
 		loginBtn = new JButton("\uB85C\uADF8\uC778");
 		loginBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -108,28 +109,33 @@ public class LoginFrame {
 				
 				switch(Integer.parseInt(result)) {
 				case ResponseCode.connect_error:
-					System.out.println("¼­¹ö¿¬°á ¿À·ù");
+					System.out.println("ì„œë²„ ì—°ê²° ì˜¤ë¥˜");
 					break;
 				case ResponseCode.login_success:
-					System.out.println("·Î±×ÀÎ ¼º°ø");
+					System.out.println("ë¡œê·¸ì¸ ì„±ê³µ");
+					mainFrame = new MainFrame(nickName);
+					JFrame mframe = mainFrame.getFrame();
+					mframe.setVisible(true);
+					frame.dispose();
+					
 					break;
 				case ResponseCode.id_error:
-					System.out.println("ÇØ´ç ´Ğ³×ÀÓ ¾øÀ½");
+					System.out.println("í•´ë‹¹ ë‹‰ë„¤ì„ ì¤‘ë³µ");
 					break;
 				case ResponseCode.pwd_error:
-					System.out.println("ÆĞ½º¿öµå ¿À·ù");
+					System.out.println("íŒ¨ìŠ¤ì›Œë“œ ì˜¤ë¥˜");
 					break;
 				}
             }
 		});
 		panel.add(loginBtn);
-		//È¸¿ø°¡ÀÔ ¹öÆ°
+		//íšŒì›ê°€ì… ë²„íŠ¼
 		joinBtn = new JButton("\uD68C\uC6D0\uAC00\uC785");
 		joinBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				joinFrame = new JoinFrame();
-				JFrame frame = joinFrame.getFrame();
-				frame.setVisible(true);
+				JFrame jframe = joinFrame.getFrame();
+				jframe.setVisible(true);
 			}
 		});
 		panel.add(joinBtn);
